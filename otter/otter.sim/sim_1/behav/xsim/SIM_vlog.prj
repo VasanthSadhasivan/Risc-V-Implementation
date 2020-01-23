@@ -1,0 +1,28 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ArithLogicUnit.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/BCD.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CSR.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CU_Decoder.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ControlUnit.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/Mult4to1.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_CPU.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_Wrapper.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ProgCount.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/SevSegDisp.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/debounce_one_shot.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/programmer.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/registerFile.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx_word.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx.sv" \
+"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx_word.sv" \
+"../../../../otter.srcs/sim_1/new/SIM.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
