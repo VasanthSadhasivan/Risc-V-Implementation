@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module OTTER_MCU(input CLK,
+ module OTTER_MCU(input CLK,
                 input INTR,
                 input EXT_RESET,  // CHANGED RESET TO EXT_RESET FOR PROGRAMMER
                 input [31:0] IOBUS_IN,
@@ -53,6 +53,13 @@ module OTTER_MCU(input CLK,
 
     // ************************ END PROGRAMMER ************************ 
 
+    // PIPELINE REGISTERS //
+    logic [31:0] fetch_to_decode;
+    logic [200:0] decode_to_execute;
+    logic [68:0] execute_to_memory;
+    logic [98:0] memory_to_writeback;
+    //********************//
+    
     wire [6:0] opcode;
     wire [31:0] pc, pc_value, next_pc, jalr_pc, branch_pc, jump_pc, int_pc,A,B,
         I_immed,S_immed,U_immed,aluBin,aluAin,aluResult,rfIn,csr_reg, mem_data;
