@@ -60,7 +60,7 @@ module OTTER_Wrapper_Programmable(
     logic IOBUS_wr;
    
     // Declare OTTER_CPU /////////////////////////////////////////////////////////
-    OTTER_MCU MCU(.EXT_RESET(s_reset), .INTR(s_interrupt), .CLK(sclk), 
+    OTTER_MCU MCU(.EXT_RESET(s_reset), /*.INTR(s_interrupt),*/ .CLK(sclk), 
                   .IOBUS_OUT(IOBUS_out), .IOBUS_IN(IOBUS_in),
                   .IOBUS_ADDR(IOBUS_addr), .IOBUS_WR(IOBUS_wr),
                   .PROG_RX(RX), .PROG_TX(TX));

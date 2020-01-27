@@ -25,7 +25,7 @@ module SIM(
     
       logic  BTNL, BTNC, RX, TX;
       logic [15:0] SWITCHES, LEDS;
-      logic [8:0] CATHODES;
+      logic [7:0] CATHODES;
       logic [3:0] ANODES;
       logic CLK;
       
@@ -44,11 +44,11 @@ module SIM(
     initial begin
       CLK = 0;
       BTNL = 0;
-      BTNC = 0;
+      BTNC = 1;
       RX = 0;
       SWITCHES = 0;
     end
-   
+    
    always  
       #5  CLK =  ! CLK;
 

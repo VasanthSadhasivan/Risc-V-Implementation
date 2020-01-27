@@ -1,0 +1,914 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Sun Jan 26 17:15:03 2020
+# Process ID: 7284
+# Current directory: C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.runs/synth_1
+# Command line: vivado.exe -log OTTER_Wrapper_Programmable.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source OTTER_Wrapper_Programmable.tcl
+# Log file: C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.runs/synth_1/OTTER_Wrapper_Programmable.vds
+# Journal file: C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source OTTER_Wrapper_Programmable.tcl -notrace
+Command: synth_design -top OTTER_Wrapper_Programmable -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 15012 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 797.262 ; gain = 234.750
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'OTTER_Wrapper_Programmable' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_Wrapper.sv:28]
+	Parameter SWITCHES_AD bound to: 285212672 - type: integer 
+	Parameter CLKCNTLO_AD bound to: 289406976 - type: integer 
+	Parameter CLKCNTHI_AD bound to: 289406980 - type: integer 
+	Parameter LEDS_AD bound to: 285736960 - type: integer 
+	Parameter SSEG_AD bound to: 285999104 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'OTTER_MCU' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_CPU.sv:24]
+INFO: [Synth 8-6157] synthesizing module 'programmer' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/programmer.sv:23]
+	Parameter CLK_RATE bound to: 50 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+	Parameter IB_TIMEOUT bound to: 200 - type: integer 
+	Parameter WAIT_TIMEOUT bound to: 500 - type: integer 
+	Parameter TIMEOUT_CLKS bound to: 25000000 - type: integer 
+	Parameter CMD_RESET_ON bound to: 24'b000011111111000000000000 
+	Parameter CMD_RESET_OFF bound to: 24'b000011111111000000000001 
+	Parameter CMD_WRITE_MEM bound to: 24'b000011111111000000000010 
+	Parameter FAIL_RESPONSE bound to: -267390961 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_rx_word' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx_word.sv:23]
+	Parameter CLK_RATE bound to: 50 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+	Parameter IB_TIMEOUT bound to: 200 - type: integer 
+	Parameter TIMEOUT_CLKS bound to: 10000000 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx.sv:20]
+	Parameter CLKS_PER_BIT bound to: 434 - type: integer 
+	Parameter CNT_SIZE bound to: 9 - type: integer 
+	Parameter s_IDLE bound to: 3'b000 
+	Parameter s_RX_START_BIT bound to: 3'b001 
+	Parameter s_RX_DATA_BITS bound to: 3'b010 
+	Parameter s_RX_STOP_BIT bound to: 3'b011 
+	Parameter s_CLEANUP bound to: 3'b100 
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (1#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx.sv:20]
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx_word' (2#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_rx_word.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx_word' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx_word.sv:23]
+	Parameter CLK_RATE bound to: 50 - type: integer 
+	Parameter BAUD bound to: 115200 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx.sv:20]
+	Parameter CLKS_PER_BIT bound to: 434 - type: integer 
+	Parameter CNT_SIZE bound to: 9 - type: integer 
+	Parameter s_IDLE bound to: 3'b000 
+	Parameter s_TX_START_BIT bound to: 3'b001 
+	Parameter s_TX_DATA_BITS bound to: 3'b010 
+	Parameter s_TX_STOP_BIT bound to: 3'b011 
+	Parameter s_CLEANUP bound to: 3'b100 
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (3#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx.sv:20]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx_word.sv:56]
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx_word' (4#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/uart_tx_word.sv:23]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/programmer.sv:133]
+INFO: [Synth 8-6155] done synthesizing module 'programmer' (5#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/programmer.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'ProgCount' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ProgCount.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'ProgCount' (6#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ProgCount.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'Mult4to1' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/Mult4to1.sv:55]
+INFO: [Synth 8-6155] done synthesizing module 'Mult4to1' (7#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/Mult4to1.sv:55]
+INFO: [Synth 8-6157] synthesizing module 'Mult2to1' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/Mult4to1.sv:68]
+INFO: [Synth 8-6155] done synthesizing module 'Mult2to1' (8#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/Mult4to1.sv:68]
+INFO: [Synth 8-6157] synthesizing module 'OTTER_ALU' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ArithLogicUnit.sv:22]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_ALU' (9#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ArithLogicUnit.sv:22]
+INFO: [Synth 8-6157] synthesizing module 'OTTER_registerFile' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/registerFile.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_registerFile' (10#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/registerFile.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'OTTER_mem_byte' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:101]
+	Parameter ACTUAL_WIDTH bound to: 14 - type: integer 
+	Parameter NUM_COL bound to: 4 - type: integer 
+	Parameter COL_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-5534] Detected attribute (* rom_style = "{distributed | block}" *) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:133]
+INFO: [Synth 8-3876] $readmem data file 'otter_memory.mem' is read successfully [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:136]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:220]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:206]
+WARNING: [Synth 8-6014] Unused sequential element j_reg was removed.  [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:160]
+INFO: [Synth 8-5772] Detected attribute (* ram_decomp = "power" *) on RAM memory_reg 
+WARNING: [Synth 8-87] always_comb on 'memOut2_reg' did not result in combinational logic [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:150]
+WARNING: [Synth 8-87] always_comb on 'MEM_DOUT1_reg' did not result in combinational logic [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:153]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_mem_byte' (11#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:101]
+INFO: [Synth 8-6157] synthesizing module 'OTTER_CU_Decoder' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CU_Decoder.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_CU_Decoder' (12#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CU_Decoder.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'OTTER_CU_FSM' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ControlUnit.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_CU_FSM' (13#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ControlUnit.sv:23]
+INFO: [Synth 8-5772] Detected attribute (* ram_decomp = "power" *) on RAM memory_reg 
+WARNING: [Synth 8-3848] Net csr_reg in module/entity OTTER_MCU does not have driver. [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_CPU.sv:327]
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_MCU' (14#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_CPU.sv:24]
+INFO: [Synth 8-6157] synthesizing module 'SevSegDisp' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/SevSegDisp.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'BCD' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/BCD.sv:23]
+INFO: [Synth 8-6155] done synthesizing module 'BCD' (15#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/BCD.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'CathodeDriver' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:19]
+INFO: [Synth 8-226] default block is never used [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:41]
+INFO: [Synth 8-226] default block is never used [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:44]
+INFO: [Synth 8-226] default block is never used [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:66]
+INFO: [Synth 8-226] default block is never used [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:88]
+INFO: [Synth 8-226] default block is never used [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:110]
+INFO: [Synth 8-6155] done synthesizing module 'CathodeDriver' (16#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv:19]
+INFO: [Synth 8-6155] done synthesizing module 'SevSegDisp' (17#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/SevSegDisp.sv:23]
+INFO: [Synth 8-6157] synthesizing module 'debounce_one_shot' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/debounce_one_shot.sv:25]
+INFO: [Synth 8-6155] done synthesizing module 'debounce_one_shot' (18#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/debounce_one_shot.sv:25]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_Wrapper.sv:93]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_Wrapper.sv:102]
+INFO: [Synth 8-5772] Detected attribute (* ram_decomp = "power" *) on RAM memory_reg 
+INFO: [Synth 8-6155] done synthesizing module 'OTTER_Wrapper_Programmable' (19#1) [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_Wrapper.sv:28]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_CLK
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_RESET
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[2]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[1]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[0]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[11]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[10]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[9]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[8]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[7]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[6]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[5]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[4]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[3]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[2]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[1]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[0]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[6]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[4]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[3]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[2]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[1]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[0]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 871.668 ; gain = 309.156
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 871.668 ; gain = 309.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 871.668 ; gain = 309.156
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.072 . Memory (MB): peak = 871.668 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/constrs_1/imports/OTTER-multicyle-baseline-programmable/Basys-3-Master.xdc]
+Finished Parsing XDC File [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/constrs_1/imports/OTTER-multicyle-baseline-programmable/Basys-3-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/constrs_1/imports/OTTER-multicyle-baseline-programmable/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/OTTER_Wrapper_Programmable_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/OTTER_Wrapper_Programmable_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 986.746 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 986.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 986.746 ; gain = 424.234
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 986.746 ; gain = 424.234
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 986.746 ; gain = 424.234
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_rx_word'
+INFO: [Synth 8-802] inferred FSM for state register 'r_SM_Main_reg' in module 'uart_tx'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_tx_word'
+INFO: [Synth 8-802] inferred FSM for state register 'r_state_reg' in module 'programmer'
+INFO: [Synth 8-5546] ROM "CU_ALU_SRCB" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "CU_RF_WR_SEL" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-802] inferred FSM for state register 'PS_reg' in module 'debounce_one_shot'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+            WAIT_RX_BYTE |                                0 | 00000000000000000000000000000000
+             OUTPUT_WORD |                                1 | 00000000000000000000000000000001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_rx_word'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  s_IDLE |                              000 |                              000
+          s_TX_START_BIT |                              001 |                              001
+          s_TX_DATA_BITS |                              010 |                              010
+           s_TX_STOP_BIT |                              011 |                              011
+               s_CLEANUP |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_SM_Main_reg' using encoding 'sequential' in module 'uart_tx'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                             0001 | 00000000000000000000000000000000
+              WAIT_START |                             0010 | 00000000000000000000000000000001
+            INIT_TX_BYTE |                             0100 | 00000000000000000000000000000010
+            WAIT_TX_BYTE |                             1000 | 00000000000000000000000000000011
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'uart_tx_word'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 | 00000000000000000000000000000000
+            WM_WAIT_ADDR |                              001 | 00000000000000000000000000000010
+             WM_WAIT_LEN |                              010 | 00000000000000000000000000000011
+            WM_WAIT_DATA |                              011 | 00000000000000000000000000000100
+                  FAILED |                              100 | 00000000000000000000000000000001
+                 WM_DONE |                              101 | 00000000000000000000000000000101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_state_reg' using encoding 'sequential' in module 'programmer'
+WARNING: [Synth 8-327] inferring latch for variable 'MEM_DOUT1_reg' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:153]
+WARNING: [Synth 8-327] inferring latch for variable 'memOut2_reg' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/bram_dualport.sv:150]
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 ST_init |                              000 | 00000000000000000000000000000000
+              ST_BTN_low |                              001 | 00000000000000000000000000000001
+      ST_BTN_low_to_high |                              010 | 00000000000000000000000000000010
+             ST_BTN_high |                              011 | 00000000000000000000000000000011
+      ST_BTN_high_to_low |                              100 | 00000000000000000000000000000100
+             ST_one_shot |                              101 | 00000000000000000000000000000101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'PS_reg' using encoding 'sequential' in module 'debounce_one_shot'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 986.746 ; gain = 424.234
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     33 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 6     
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     25 Bit       Adders := 1     
+	   2 Input     20 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 2     
+	   2 Input      8 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 35    
+	   2 Input      3 Bit       Adders := 9     
+	   2 Input      2 Bit       Adders := 3     
++---XORs : 
+	   4 Input     32 Bit         XORs := 1     
+	   2 Input     32 Bit         XORs := 2     
++---Registers : 
+	              267 Bit    Registers := 1     
+	              263 Bit    Registers := 1     
+	              131 Bit    Registers := 1     
+	               64 Bit    Registers := 1     
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 5     
+	               25 Bit    Registers := 1     
+	               24 Bit    Registers := 1     
+	               16 Bit    Registers := 2     
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 5     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 11    
++---Multipliers : 
+	                32x32  Multipliers := 1     
++---RAMs : 
+	             512K Bit         RAMs := 1     
+	             1024 Bit         RAMs := 1     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 2     
+	   4 Input     32 Bit        Muxes := 12    
+	   2 Input     32 Bit        Muxes := 13    
+	   6 Input     32 Bit        Muxes := 2     
+	   7 Input     32 Bit        Muxes := 2     
+	   9 Input     32 Bit        Muxes := 2     
+	   2 Input     25 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 2     
+	   6 Input      9 Bit        Muxes := 1     
+	   6 Input      8 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 3     
+	   4 Input      8 Bit        Muxes := 1     
+	  19 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   4 Input      5 Bit        Muxes := 1     
+	   5 Input      5 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 32    
+	   6 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 29    
+	   5 Input      3 Bit        Muxes := 1     
+	   6 Input      3 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 8     
+	   3 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 5     
+	   6 Input      2 Bit        Muxes := 1     
+	   5 Input      2 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 18    
+	   2 Input      1 Bit        Muxes := 37    
+	   5 Input      1 Bit        Muxes := 10    
+	   3 Input      1 Bit        Muxes := 6     
+	   4 Input      1 Bit        Muxes := 8     
+	   9 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module OTTER_Wrapper_Programmable 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 2     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 2     
+Module uart_rx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      9 Bit        Muxes := 1     
+	   6 Input      9 Bit        Muxes := 1     
+	   6 Input      8 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
+Module uart_rx_word 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               24 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 8     
+	   3 Input      1 Bit        Muxes := 2     
+Module uart_tx 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 6     
+	   5 Input      3 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 9     
+	   2 Input      1 Bit        Muxes := 1     
+Module uart_tx_word 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 3     
+Module programmer 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     25 Bit       Adders := 1     
++---XORs : 
+	   4 Input     32 Bit         XORs := 1     
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               25 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input     25 Bit        Muxes := 2     
+	   6 Input      4 Bit        Muxes := 1     
+	   6 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 12    
+	   4 Input      1 Bit        Muxes := 5     
+	   6 Input      1 Bit        Muxes := 10    
+Module ProgCount 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module Mult4to1 
+Detailed RTL Component Info : 
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 1     
+Module Mult2to1 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+Module OTTER_ALU 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   3 Input     32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Multipliers : 
+	                32x32  Multipliers := 1     
+Module OTTER_registerFile 
+Detailed RTL Component Info : 
++---RAMs : 
+	             1024 Bit         RAMs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+Module OTTER_mem_byte 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
++---RAMs : 
+	             512K Bit         RAMs := 1     
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 6     
+	   2 Input     32 Bit        Muxes := 5     
+	   6 Input     32 Bit        Muxes := 2     
+	   7 Input     32 Bit        Muxes := 2     
+	   9 Input     32 Bit        Muxes := 2     
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   4 Input      5 Bit        Muxes := 1     
+	   5 Input      5 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 1     
+Module OTTER_CU_Decoder 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 2     
+	   6 Input      2 Bit        Muxes := 1     
+	   5 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   7 Input      1 Bit        Muxes := 1     
+Module OTTER_MCU 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     33 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 5     
++---Registers : 
+	              267 Bit    Registers := 1     
+	              263 Bit    Registers := 1     
+	              131 Bit    Registers := 1     
+	               64 Bit    Registers := 1     
+	               33 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module BCD 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 34    
+	   2 Input      3 Bit       Adders := 7     
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 30    
+	   2 Input      3 Bit        Muxes := 4     
+Module CathodeDriver 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     20 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	  19 Input      8 Bit        Muxes := 1     
+	   4 Input      4 Bit        Muxes := 1     
+Module SevSegDisp 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+Module debounce_one_shot 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	                8 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   6 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 7     
+	   2 Input      1 Bit        Muxes := 5     
+	   3 Input      1 Bit        Muxes := 2     
+	   6 Input      1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 4 [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ArithLogicUnit.sv:41]
+DSP Report: Generating DSP ALUOut0, operation Mode is: A*B.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: Generating DSP ALUOut0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: Generating DSP ALUOut0, operation Mode is: A*B.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: Generating DSP ALUOut0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+DSP Report: operator ALUOut0 is absorbed into DSP ALUOut0.
+INFO: [Synth 8-5546] ROM "CU_ALU_SRCB" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "CU_RF_WR_SEL" won't be mapped to RAM because it is too sparse
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_CLK
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_RESET
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[2]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[1]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC3[0]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[11]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[10]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[9]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[8]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[7]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[6]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[5]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[4]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[3]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[2]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[1]
+WARNING: [Synth 8-3331] design OTTER_CU_FSM has unconnected port CU_FUNC12[0]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[6]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[4]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[3]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[2]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[1]
+WARNING: [Synth 8-3331] design OTTER_CU_Decoder has unconnected port CU_FUNC7[0]
+INFO: [Synth 8-6851] RAM (memory_reg) has partial Byte Wide Write Enable pattern, however no output register found in fanout of RAM. Recommended to use supported Byte Wide Write Enable template. 
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[213]' (FD) to 'MCU/decode_to_execute_reg[33]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[214]' (FD) to 'MCU/decode_to_execute_reg[34]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[215]' (FD) to 'MCU/decode_to_execute_reg[35]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[216]' (FD) to 'MCU/decode_to_execute_reg[36]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[212]' (FD) to 'MCU/decode_to_execute_reg[32]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[217]' (FD) to 'MCU/decode_to_execute_reg[37]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[218]' (FD) to 'MCU/decode_to_execute_reg[38]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[219]' (FD) to 'MCU/decode_to_execute_reg[39]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[220]' (FD) to 'MCU/decode_to_execute_reg[40]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[221]' (FD) to 'MCU/decode_to_execute_reg[41]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[222]' (FD) to 'MCU/decode_to_execute_reg[42]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[223]' (FD) to 'MCU/decode_to_execute_reg[43]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[43]' (FD) to 'MCU/decode_to_execute_reg[44]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[44]' (FD) to 'MCU/decode_to_execute_reg[45]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[45]' (FD) to 'MCU/decode_to_execute_reg[46]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[46]' (FD) to 'MCU/decode_to_execute_reg[47]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[47]' (FD) to 'MCU/decode_to_execute_reg[48]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[48]' (FD) to 'MCU/decode_to_execute_reg[49]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[49]' (FD) to 'MCU/decode_to_execute_reg[50]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[50]' (FD) to 'MCU/decode_to_execute_reg[51]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[51]' (FD) to 'MCU/decode_to_execute_reg[52]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[52]' (FD) to 'MCU/decode_to_execute_reg[53]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[53]' (FD) to 'MCU/decode_to_execute_reg[54]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[54]' (FD) to 'MCU/decode_to_execute_reg[55]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[55]' (FD) to 'MCU/decode_to_execute_reg[56]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[56]' (FD) to 'MCU/decode_to_execute_reg[57]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[57]' (FD) to 'MCU/decode_to_execute_reg[58]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[58]' (FD) to 'MCU/decode_to_execute_reg[59]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[59]' (FD) to 'MCU/decode_to_execute_reg[60]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[60]' (FD) to 'MCU/decode_to_execute_reg[61]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[61]' (FD) to 'MCU/decode_to_execute_reg[62]'
+INFO: [Synth 8-3886] merging instance 'MCU/decode_to_execute_reg[62]' (FD) to 'MCU/decode_to_execute_reg[63]'
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[31]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[30]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[29]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[28]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[27]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[26]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[25]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[24]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[23]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[22]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[21]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[20]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[19]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[18]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[17]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[16]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[15]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[14]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[13]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[12]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[11]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[10]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[9]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[8]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[7]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[6]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[5]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[4]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[3]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[2]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[1]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (MEM_DOUT1_reg[0]) is unused and will be removed from module OTTER_mem_byte.
+WARNING: [Synth 8-3332] Sequential element (DB_I/FSM_sequential_PS_reg[2]) is unused and will be removed from module OTTER_Wrapper_Programmable.
+WARNING: [Synth 8-3332] Sequential element (DB_I/FSM_sequential_PS_reg[1]) is unused and will be removed from module OTTER_Wrapper_Programmable.
+WARNING: [Synth 8-3332] Sequential element (DB_I/FSM_sequential_PS_reg[0]) is unused and will be removed from module OTTER_Wrapper_Programmable.
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (\SSG_DISP/CathMod/CATHODES_reg[7] )
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:39 . Memory (MB): peak = 1018.094 ; gain = 455.582
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping	Report (see note below)
++------------+------------+-----------+----------------------+-------------------+
+|Module Name | RTL Object | Inference | Size (Depth x Width) | Primitives        | 
++------------+------------+-----------+----------------------+-------------------+
+|MCU/RF      | RF_reg     | Implied   | 32 x 32              | RAM32M x 12	      | 
+|MCU/memory  | memory_reg | Implied   | 16 K x 32            | RAM128X1D x 4096	 | 
++------------+------------+-----------+----------------------+-------------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping	Report (see note below)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|OTTER_ALU   | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|OTTER_ALU   | (PCIN>>17)+A*B | 16     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|OTTER_ALU   | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|OTTER_ALU   | (PCIN>>17)+A*B | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:47 ; elapsed = 00:00:47 . Memory (MB): peak = 1018.094 ; gain = 455.582
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:00:50 . Memory (MB): peak = 1018.094 ; gain = 455.582
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping	Report
++------------+------------+-----------+----------------------+-------------------+
+|Module Name | RTL Object | Inference | Size (Depth x Width) | Primitives        | 
++------------+------------+-----------+----------------------+-------------------+
+|MCU/RF      | RF_reg     | Implied   | 32 x 32              | RAM32M x 12	      | 
+|MCU/memory  | memory_reg | Implied   | 16 K x 32            | RAM128X1D x 4096	 | 
++------------+------------+-----------+----------------------+-------------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-3886] merging instance 'MCU/execute_to_memory_reg[0]' (FD) to 'MCU/execute_to_memory_reg[32]'
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:59 ; elapsed = 00:01:00 . Memory (MB): peak = 1166.758 ; gain = 604.246
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:06 ; elapsed = 00:01:07 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:09 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:09 ; elapsed = 00:01:09 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:09 ; elapsed = 00:01:10 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:09 ; elapsed = 00:01:10 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++---------------------------+----------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                | RTL Name                         | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++---------------------------+----------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|OTTER_Wrapper_Programmable | MCU/memory_to_writeback_reg[130] | 3      | 3     | NO           | NO                 | YES               | 3      | 0       | 
++---------------------------+----------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |BUFG      |     3|
+|2     |CARRY4    |   129|
+|3     |LUT1      |    45|
+|4     |LUT2      |   274|
+|5     |LUT3      |   111|
+|6     |LUT4      |  2665|
+|7     |LUT5      |  2535|
+|8     |LUT6      |  3173|
+|9     |MUXF7     |  1095|
+|10    |MUXF8     |   512|
+|11    |RAM128X1D |  4096|
+|12    |RAM32M    |    12|
+|13    |SRL16E    |     3|
+|14    |FDRE      |  1132|
+|15    |FDSE      |     5|
+|16    |LD        |    32|
+|17    |IBUF      |    19|
+|18    |OBUF      |    29|
++------+----------+------+
+
+Report Instance Areas: 
++------+-------------------+-------------------+------+
+|      |Instance           |Module             |Cells |
++------+-------------------+-------------------+------+
+|1     |top                |                   | 15870|
+|2     |  DB_R             |debounce_one_shot  |    43|
+|3     |  MCU              |OTTER_MCU          | 15573|
+|4     |    ALUAinput      |Mult2to1           |    20|
+|5     |    ALUBinput      |Mult4to1           |    38|
+|6     |    PC             |ProgCount          |    58|
+|7     |    PCdatasrc      |Mult4to1_0         |    48|
+|8     |    RF             |OTTER_registerFile |   136|
+|9     |    memory         |OTTER_mem_byte     |  8020|
+|10    |    programmer     |programmer         |  6152|
+|11    |      uart_rx_word |uart_rx_word       |  5858|
+|12    |        uart_rx    |uart_rx            |   103|
+|13    |      uart_tx_word |uart_tx_word       |   139|
+|14    |        uart_tx    |uart_tx            |    58|
+|15    |    regWriteback   |Mult4to1_1         |    32|
+|16    |  SSG_DISP         |SevSegDisp         |    88|
+|17    |    CathMod        |CathodeDriver      |    88|
++------+-------------------+-------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:09 ; elapsed = 00:01:10 . Memory (MB): peak = 1170.211 ; gain = 607.699
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 60 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:59 ; elapsed = 00:01:07 . Memory (MB): peak = 1170.211 ; gain = 492.621
+Synthesis Optimization Complete : Time (s): cpu = 00:01:09 ; elapsed = 00:01:10 . Memory (MB): peak = 1170.211 ; gain = 607.699
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.397 . Memory (MB): peak = 1170.211 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5876 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 4 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.032 . Memory (MB): peak = 1170.211 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 4140 instances were transformed.
+  LD => LDCE: 32 instances
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 4096 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 12 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+116 Infos, 87 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:22 ; elapsed = 00:01:25 . Memory (MB): peak = 1170.211 ; gain = 869.586
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.033 . Memory (MB): peak = 1170.211 ; gain = 0.000
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint 'C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.runs/synth_1/OTTER_Wrapper_Programmable.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file OTTER_Wrapper_Programmable_utilization_synth.rpt -pb OTTER_Wrapper_Programmable_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Jan 26 17:16:35 2020...

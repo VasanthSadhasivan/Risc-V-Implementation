@@ -4,6 +4,30 @@ Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 84adb493ee
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 9 differs from formal bit length 8 for port 'CATHODES' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/otter/otter.srcs/sim_1/new/SIM.sv:40]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'In2' [C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/OTTER_CPU.sv:327]
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.uart_rx(CLKS_PER_BIT=434)
+Compiling module xil_defaultlib.uart_rx_word(CLK_RATE=50)
+Compiling module xil_defaultlib.uart_tx(CLKS_PER_BIT=434)
+Compiling module xil_defaultlib.uart_tx_word(CLK_RATE=50)
+Compiling module xil_defaultlib.programmer(CLK_RATE=50)
+Compiling module xil_defaultlib.ProgCount
+Compiling module xil_defaultlib.Mult4to1
+Compiling module xil_defaultlib.Mult2to1
+Compiling module xil_defaultlib.OTTER_ALU
+Compiling module xil_defaultlib.OTTER_registerFile
+Compiling module xil_defaultlib.OTTER_mem_byte
+Compiling module xil_defaultlib.OTTER_CU_Decoder
+Compiling module xil_defaultlib.OTTER_CU_FSM
+Compiling module xil_defaultlib.OTTER_MCU
+Compiling module xil_defaultlib.BCD
+Compiling module xil_defaultlib.CathodeDriver
+Compiling module xil_defaultlib.SevSegDisp
+Compiling module xil_defaultlib.debounce_one_shot
+Compiling module xil_defaultlib.OTTER_Wrapper_Programmable
+Compiling module xil_defaultlib.SIM
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot SIM_behav

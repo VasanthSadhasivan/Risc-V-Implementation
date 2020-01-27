@@ -22,13 +22,12 @@
 
 module OTTER_CU_FSM(
     input CU_CLK,
-    input CU_INT,
-    input CU_prevINT,
+    //input CU_INT,
+    //input CU_prevINT,
     input CU_RESET,
     input [6:0] CU_OPCODE,
     input [2:0] CU_FUNC3,
     input [11:0] CU_FUNC12,
-    output logic CU_PCWRITE,  //PCWrite
     output logic CU_REGWRITE,    
     output logic CU_MEMWRITE,
     output logic CU_MEMREAD1,
@@ -77,7 +76,7 @@ module OTTER_CU_FSM(
         assign CU_MEMREAD2 = CU_OPCODE==LOAD;//(state==1 && CU_OPCODE==LOAD);
         assign CU_MEMWRITE = CU_OPCODE == STORE;//(state == 1) && (CU_OPCODE == STORE);
         
-        assign CU_PCWRITE = 1;//(state==1 && CU_OPCODE!=LOAD)|| (state==2 && CU_OPCODE==LOAD)||(state==INTER); //(state == 0) || (state==1 && (CU_OPCODE ==JAL || CU_OPCODE==JALR || (CU_OPCODE==BRANCH && brn_cond)));
+        //assign CU_PCWRITE = 1;//(state==1 && CU_OPCODE!=LOAD)|| (state==2 && CU_OPCODE==LOAD)||(state==INTER); //(state == 0) || (state==1 && (CU_OPCODE ==JAL || CU_OPCODE==JALR || (CU_OPCODE==BRANCH && brn_cond)));
         
         // assign CU_RF_WR_SEL = ((state == 2) && (CU_OPCODE == OP || CU_OP_CODE)) ? 0 : 1;
         assign CU_REGWRITE = CU_OPCODE != BRANCH && CU_OPCODE != STORE;//(state == 2) || ((state == 1) && (CU_OPCODE != BRANCH && CU_OPCODE !=LOAD && CU_OPCODE !=STORE && ~MRET) );

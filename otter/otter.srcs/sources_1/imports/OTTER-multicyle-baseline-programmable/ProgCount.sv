@@ -28,6 +28,7 @@ module ProgCount(
     output logic [31:0] PC_COUNT=0
     );
     
+    
     always_ff @(posedge PC_CLK)
     begin
         if (PC_RST == 1'b1)

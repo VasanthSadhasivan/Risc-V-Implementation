@@ -2,7 +2,6 @@
 sv xil_defaultlib  \
 "../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ArithLogicUnit.sv" \
 "../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/BCD.sv" \
-"../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CSR.sv" \
 "../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CU_Decoder.sv" \
 "../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/CathodeDriver.sv" \
 "../../../../otter.srcs/sources_1/imports/OTTER-multicyle-baseline-programmable/ControlUnit.sv" \
