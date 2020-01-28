@@ -27,7 +27,12 @@ module OTTER_registerFile(Read1,Read2,WriteReg,WriteData,RegWrite,Data1,Data2,cl
         clock;  // the clock to trigger write
     output logic [31:0] Data1, Data2; // the register values read
     logic [31:0] RF [31:0]; //32 registers each 32 bits long
-    
+    integer i;
+    initial 
+        begin
+            for (i=0;i<=31;i=i+1)
+                RF[i] = 0;
+        end
     //assign Data1 = RF[Read1];
     //assign Data2 = RF[Read2];
     always_comb
@@ -36,7 +41,7 @@ module OTTER_registerFile(Read1,Read2,WriteReg,WriteData,RegWrite,Data1,Data2,cl
     always_comb
         if(Read2==0) Data2 =0;
         else Data2 = RF[Read2];
-    
+
     always@(posedge clock) begin // write the register with the new value if Regwrite is high
         if(RegWrite && WriteReg!=0) RF[WriteReg] <= WriteData;
         

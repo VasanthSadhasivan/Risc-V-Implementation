@@ -62,14 +62,14 @@
     logic [32:0] stall = 0;
     logic pc_write_cont = 1;
     wire pc_write_data;
-    logic dependency_exists;
+    logic dependency_exists = 0;
     //********************//
 
     // PIPELINE REGISTERS //
     logic [63:0] fetch_to_decode = 0;
     logic [266:0] decode_to_execute = 0;
     logic [262:0] execute_to_memory = 0;
-    logic [130:0] memory_to_writeback = 0;
+    logic [133:0] memory_to_writeback = 0;
     //********************//
     
     wire [6:0] opcode_decode;
@@ -80,6 +80,7 @@
     wire [6:0] opcode_writeback;
     
     wire [31:0] pc_fetch;
+    logic [31:0] pc_delayed_fetch = 0;
     wire [31:0] pc_decode;
     wire [31:0] pc_execute;
     wire [31:0] pc_memory;
@@ -148,7 +149,7 @@
     wire memRead2_execute;
     wire memRead2_memory;
     
-    wire memRead1_fetch;
+    logic memRead1_fetch=0;
     
     wire pcWrite_fetch;
     
@@ -164,6 +165,7 @@
     wire [1:0] pcSource_decode;
     wire [1:0] pcSource_execute;
     wire [1:0] pcSource_memory;
+    wire [1:0] pcSource_writeback;
     
     wire [3:0] alu_fun_decode;
     wire [3:0] alu_fun_execute;
@@ -181,9 +183,11 @@
                     begin
                         dependency_reason = 1;
                         stall = 3;
+                        memRead1_fetch = 0;
                     end
                 else
                     begin
+                        memRead1_fetch = 1;
                         dependency_reason = 0;
                         stall = 2;
                     end
@@ -204,12 +208,13 @@
             end
         else
             begin
+                memRead1_fetch = 1;
                 stall = 0;
             end
     end
     
     //GENERAL HAZARD PREVENTION
-    assign IR_fetch = (stall>0 || dependency_exists)? 19 : IR_pre_fetch;
+    assign IR_fetch = (stall>0 || dependency_exists || pcSource_writeback != 0)? 19 : IR_pre_fetch;
     assign pcWrite_fetch = pc_write_cont && pc_write_data;
     
     // DATA HAZARD PREVENTION //
@@ -378,7 +383,7 @@
      OTTER_CU_FSM CU_FSM (.CU_CLK(CLK), /*.CU_INT(INTR),*/ .CU_RESET(RESET), .CU_OPCODE(opcode_decode), //.CU_OPCODE(opcode),
                      .CU_FUNC3(IR_decode[14:12]),.CU_FUNC12(IR_decode[31:20]),
                      .CU_REGWRITE(regWrite_decode), .CU_MEMWRITE(memWrite_decode), 
-                     .CU_MEMREAD1(memRead1_fetch),.CU_MEMREAD2(memRead2_decode));//.CU_intTaken(intTaken),.CU_intCLR(intCLR),.CU_csrWrite(csrWrite),.CU_prevINT(prev_INT));
+                     .CU_MEMREAD2(memRead2_decode));//.CU_intTaken(intTaken),.CU_intCLR(intCLR),.CU_csrWrite(csrWrite),.CU_prevINT(prev_INT));
     
     
     
@@ -402,9 +407,14 @@
     // tying left hand side of wires to left side of register
     always @(posedge CLK)
     begin
-        fetch_to_decode[31:0]       = pc_fetch;
+
+    
+        fetch_to_decode[31:0]       = pc_delayed_fetch;
         fetch_to_decode[63:32]      = IR_fetch;
-        
+                if(pcWrite_fetch)
+            begin
+                pc_delayed_fetch = pc_fetch;
+            end
         decode_to_execute[31:0]     = pc_decode;
         decode_to_execute[63:32]    = I_immed_decode;  
         decode_to_execute[95:64]    = A_decode;        
@@ -437,7 +447,8 @@
         memory_to_writeback[95:64]    = dout2_memory;
         memory_to_writeback[127:96]   = IR_memory;
         memory_to_writeback[128:128]  = regWrite_memory;
-        memory_to_writeback[130:129]  = rf_wr_sel_memory;    
+        memory_to_writeback[130:129]  = rf_wr_sel_memory;
+        memory_to_writeback[132:131]  = pcSource_memory;
         
     end
 
@@ -479,5 +490,6 @@
         assign IR_writeback = memory_to_writeback[127:96];
         assign regWrite_writeback = memory_to_writeback[128:128];
         assign rf_wr_sel_writeback = memory_to_writeback[130:129];
+        assign pcSource_writeback = memory_to_writeback[132:131];
 
 endmodule

@@ -146,15 +146,16 @@ module OTTER_mem_dualport(MEM_CLK,MEM_ADDR1,MEM_ADDR2,MEM_DIN2,MEM_WRITE2,MEM_RE
                 default: weA=4'b0000;
         endcase
         
+
+    end
+    integer i,j;
+    always_ff @(posedge MEM_CLK) begin
+        //PORT 2  //Data
         if(MEM_READ2)
             memOut2 = memory[memAddr2]; 
         //PORT 1  //Instructions
         if(MEM_READ1)
             MEM_DOUT1 = memory[memAddr1]; 
-    end
-    integer i,j;
-    always_ff @(posedge MEM_CLK) begin
-        //PORT 2  //Data
         if(memWrite2)
         begin
             j=0;

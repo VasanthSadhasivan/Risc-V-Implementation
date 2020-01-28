@@ -30,7 +30,6 @@ module OTTER_CU_FSM(
     input [11:0] CU_FUNC12,
     output logic CU_REGWRITE,    
     output logic CU_MEMWRITE,
-    output logic CU_MEMREAD1,
     output logic CU_MEMREAD2
     //output logic CU_intTaken,
     //output logic CU_csrWrite,
@@ -72,7 +71,6 @@ module OTTER_CU_FSM(
         assign MRET = (CU_OPCODE==SYSTEM) && (CU_FUNC3==Func3_PRIV) && (CU_FUNC12==12'h302);         
                       
        //DECODING (depends on state) ////////////////////////////////////////////////////
-        assign CU_MEMREAD1 = 1;//(state ==0);         
         assign CU_MEMREAD2 = CU_OPCODE==LOAD;//(state==1 && CU_OPCODE==LOAD);
         assign CU_MEMWRITE = CU_OPCODE == STORE;//(state == 1) && (CU_OPCODE == STORE);
         
