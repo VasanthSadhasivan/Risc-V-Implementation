@@ -1,0 +1,6 @@
+0.6
+2019.2
+Nov  6 2019
+21:57:16
+C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.sim/sim_1/impl/timing/xsim/SIM_time_impl.v,1580208732,verilog,,,,CathodeDriver;Mult2to1;Mult4to1;Mult4to1_0;Mult4to1_1;OTTER_MCU;OTTER_Wrapper_Programmable;OTTER_mem_byte;OTTER_registerFile;ProgCount;RAM32M_HD34;RAM32M_HD35;RAM32M_HD36;RAM32M_HD37;RAM32M_HD38;RAM32M_HD39;RAM32M_HD40;RAM32M_HD41;RAM32M_HD42;RAM32M_HD43;RAM32M_HD44;RAM32M_UNIQ_BASE_;SevSegDisp;debounce_one_shot;glbl;programmer;uart_rx;uart_rx_word;uart_tx;uart_tx_word,,,,,,,,
+C:/Users/VasanthSadhasivan/CalPoly/CPE333/OTTER/OTTER_RISC_V_ARCH/otter/otter.srcs/sim_1/new/SIM.sv,1580208296,systemVerilog,,,,SIM,,,,,,,,

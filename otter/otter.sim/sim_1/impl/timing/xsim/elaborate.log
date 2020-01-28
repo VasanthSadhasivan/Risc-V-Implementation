@@ -1,0 +1,69 @@
+Vivado Simulator 2019.2
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 84adb493ee514b56a4c945473bfe1b76 --incr --debug typical --relax --mt 2 --maxdelay -L xil_defaultlib -L simprims_ver -L secureip --snapshot SIM_time_impl -transport_int_delays -pulse_r 0 -pulse_int_r 0 -pulse_e 0 -pulse_int_e 0 xil_defaultlib.SIM xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+INFO: [XSIM 43-3451] SDF backannotation process started with SDF file "SIM_time_impl.sdf", for root module "SIM/OTTER_Wrapper_Programmable".
+INFO: [XSIM 43-3452] SDF backannotation was successful for SDF file "SIM_time_impl.sdf", for root module "SIM/OTTER_Wrapper_Programmable".
+Time Resolution for simulation is 1ps
+Compiling module simprims_ver.OBUF
+Compiling module simprims_ver.IBUF
+Compiling module simprims_ver.BUFG
+Compiling module simprims_ver.LUT4
+Compiling module simprims_ver.LUT6
+Compiling module simprims_ver.x_lut2_mux4
+Compiling module simprims_ver.LUT2
+Compiling module simprims_ver.LUT5
+Compiling module simprims_ver.FDRE_default
+Compiling module simprims_ver.x_lut3_mux8
+Compiling module simprims_ver.LUT3
+Compiling module xil_defaultlib.debounce_one_shot
+Compiling module xil_defaultlib.Mult2to1
+Compiling module xil_defaultlib.Mult4to1
+Compiling module xil_defaultlib.ProgCount
+Compiling module simprims_ver.x_lut1_mux2
+Compiling module simprims_ver.LUT1
+Compiling module simprims_ver.CARRY4
+Compiling module xil_defaultlib.Mult4to1_0
+Compiling module simprims_ver.RAMD32
+Compiling module simprims_ver.RAMS32
+Compiling module xil_defaultlib.RAM32M_UNIQ_BASE_
+Compiling module xil_defaultlib.RAM32M_HD34
+Compiling module xil_defaultlib.RAM32M_HD35
+Compiling module xil_defaultlib.RAM32M_HD36
+Compiling module xil_defaultlib.RAM32M_HD37
+Compiling module xil_defaultlib.RAM32M_HD38
+Compiling module xil_defaultlib.RAM32M_HD39
+Compiling module xil_defaultlib.RAM32M_HD40
+Compiling module xil_defaultlib.RAM32M_HD41
+Compiling module xil_defaultlib.RAM32M_HD42
+Compiling module xil_defaultlib.RAM32M_HD43
+Compiling module xil_defaultlib.RAM32M_HD44
+Compiling module xil_defaultlib.OTTER_registerFile
+Compiling module simprims_ver.SRL16E_default
+Compiling module simprims_ver.MUXF8
+Compiling module simprims_ver.MUXF7
+Compiling module simprims_ver.RB36_INTERNAL_VLOG(READ_WIDTH_A=...
+Compiling module simprims_ver.RAMB36E1(READ_WIDTH_A=36,READ_WI...
+Compiling module simprims_ver.RB36_INTERNAL_VLOG(READ_WIDTH_A=...
+Compiling module simprims_ver.RAMB36E1(INIT_00=256'b0101010001...
+Compiling module xil_defaultlib.OTTER_mem_byte
+Compiling module simprims_ver.FDRE(INIT=1'b1)
+Compiling module xil_defaultlib.uart_rx
+Compiling module xil_defaultlib.uart_rx_word
+Compiling module simprims_ver.FDSE_default
+Compiling module xil_defaultlib.uart_tx
+Compiling module xil_defaultlib.uart_tx_word
+Compiling module xil_defaultlib.programmer
+Compiling module xil_defaultlib.Mult4to1_1
+Compiling module xil_defaultlib.OTTER_MCU
+Compiling module xil_defaultlib.CathodeDriver
+Compiling module xil_defaultlib.SevSegDisp
+Compiling module xil_defaultlib.OTTER_Wrapper_Programmable
+Compiling module xil_defaultlib.SIM
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot SIM_time_impl

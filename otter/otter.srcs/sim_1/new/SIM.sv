@@ -44,7 +44,7 @@ module SIM(
     initial begin
       CLK = 0;
       BTNL = 0;
-      BTNC = 1;
+      BTNC = 0;
       RX = 0;
       SWITCHES = 0;
     end

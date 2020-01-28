@@ -116,15 +116,15 @@ module OTTER_mem_dualport(MEM_CLK,MEM_ADDR1,MEM_ADDR2,MEM_DIN2,MEM_WRITE2,MEM_RE
     output ERR;
     input [1:0] MEM_SIZE;
     input MEM_SIGN;
-    output logic [31:0] MEM_DOUT1;
-    output logic [31:0] MEM_DOUT2;
+    output logic [31:0] MEM_DOUT1=19;
+    output logic [31:0] MEM_DOUT2=0;
     output logic IO_WR;
     
     wire [ACTUAL_WIDTH-1:0] memAddr1,memAddr2;
-    logic memWrite2;  
-    logic [31:0] memOut2;
+    logic memWrite2=0;  
+    logic [31:0] memOut2=0;
     logic [31:0] ioIn_buffer=0;
-    logic [NUM_COL-1:0] weA;
+    logic [NUM_COL-1:0] weA=0;
    
      assign memAddr1 =MEM_ADDR1[ACTUAL_WIDTH+1:2];
     assign memAddr2 =MEM_ADDR2[ACTUAL_WIDTH+1:2];

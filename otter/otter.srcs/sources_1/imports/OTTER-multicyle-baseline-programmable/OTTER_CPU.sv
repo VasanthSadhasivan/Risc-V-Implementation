@@ -29,11 +29,13 @@
                 output [31:0] IOBUS_ADDR,
                 output logic IOBUS_WR,
                 input PROG_RX,  // ADDED PROG_RX FOR PROGRAMMER
-                output PROG_TX  // ADDED PROG_TX FOR PROGRAMMER
+                output PROG_TX,  // ADDED PROG_TX FOR PROGRAMMER
+                //DEBUG OUTPUTS
+                output [31:0]DEBUG
 );           
 
     // ************************ BEGIN PROGRAMMER ************************ 
-
+    
     wire RESET;
     wire [31:0] s_prog_ram_addr;
     wire [31:0] s_prog_ram_data;
@@ -41,6 +43,7 @@
     wire s_prog_mcu_reset;
     
     wire [31:0] mem_addr_after_memory;
+    wire [31:0] mem_addr_after_writeback;
 
     wire [31:0] mem_data_after_memory;
     
@@ -69,7 +72,7 @@
     logic [63:0] fetch_to_decode = 0;
     logic [266:0] decode_to_execute = 0;
     logic [262:0] execute_to_memory = 0;
-    logic [133:0] memory_to_writeback = 0;
+    logic [165:0] memory_to_writeback = 0;
     //********************//
     
     wire [6:0] opcode_decode;
@@ -149,7 +152,8 @@
     wire memRead2_execute;
     wire memRead2_memory;
     
-    logic memRead1_fetch=0;
+    logic memRead1_fetch=1;
+    wire memRead1_fetch_data;
     
     wire pcWrite_fetch;
     
@@ -169,7 +173,8 @@
     
     wire [3:0] alu_fun_decode;
     wire [3:0] alu_fun_execute;
-    
+    //DEBUG DECLARATIONS
+    assign DEBUG = pc_decode;
     logic dependency_reason = 0;
     // CONTROL HAZARD PREVENTION //
     always @(posedge CLK)
@@ -179,37 +184,36 @@
             IR_fetch[6:0] == 7'b1100011 ||
             dependency_exists)
             begin
+                memRead1_fetch <= 0;
                 if(dependency_exists)
                     begin
-                        dependency_reason = 1;
-                        stall = 3;
-                        memRead1_fetch = 0;
+                        dependency_reason <= 1;
+                        stall <= 3;
                     end
                 else
                     begin
-                        memRead1_fetch = 1;
-                        dependency_reason = 0;
-                        stall = 2;
+                        dependency_reason <= 0;
+                        stall <= 2;
                     end
-                pc_write_cont = 0;
+                pc_write_cont <= 0;
             end
         else if (stall > 1)
             begin
-                stall = stall - 1;
+                stall <= stall - 1;
             end
         else if (stall == 1 && pc_write_cont == 0)
             begin
-                pc_write_cont = 1;
+                pc_write_cont <= 1;
+                memRead1_fetch <= 1;
                 if(dependency_reason)
                     begin
                         dependency_reason = 0;
-                        stall = 0;
+                        stall <= 0;
                     end
             end
         else
             begin
-                memRead1_fetch = 1;
-                stall = 0;
+                stall <= 0;
             end
     end
     
@@ -220,6 +224,7 @@
     // DATA HAZARD PREVENTION //
     
     assign pc_write_data = ~dependency_exists;
+    assign memRead1_fetch_data = ~dependency_exists;
     
     always @*
     begin
@@ -267,11 +272,11 @@
                                     (IR_pre_fetch[24:20] == IR_writeback[11:7] && IR_pre_fetch[24:20]  != 0)|| 
                                     (IR_pre_fetch[19:15] == IR_writeback[11:7] && IR_pre_fetch[19:15]  != 0))
                                     begin
-                                        dependency_exists = 1;
+                                        dependency_exists <= 1;
                                     end
                                 else
                                     begin
-                                        dependency_exists = 0;
+                                        dependency_exists <= 0;
                                     end
                             end
                          else
@@ -281,23 +286,23 @@
                                     (IR_pre_fetch[19:15] == IR_memory[11:7]    && IR_pre_fetch[19:15]  != 0)|| 
                                     (IR_pre_fetch[19:15] == IR_writeback[11:7] && IR_pre_fetch[19:15]  != 0))
                                     begin
-                                        dependency_exists = 1;
+                                        dependency_exists <= 1;
                                     end
                                 else
                                     begin
-                                        dependency_exists = 0;
+                                        dependency_exists <= 0;
                                     end
                             end
                     end
 
                 else
                     begin
-                        dependency_exists = 0;
+                        dependency_exists <= 0;
                     end
             end
         else
             begin
-                dependency_exists = 0;
+                dependency_exists <= 0;
             end
     end
 
@@ -366,7 +371,7 @@
     // ************************ END PROGRAMMER ************************               
                            
      OTTER_mem_byte #(14) memory  (.MEM_CLK(CLK),.MEM_ADDR1(pc_fetch),.MEM_ADDR2(mem_addr_after_memory),.MEM_DIN2(mem_data_after_memory),
-                               .MEM_WRITE2(mem_we_after_memory),.MEM_READ1(memRead1_fetch),.MEM_READ2(memRead2_memory),
+                               .MEM_WRITE2(mem_we_after_memory),.MEM_READ1(memRead1_fetch && memRead1_fetch_data),.MEM_READ2(memRead2_memory),
                                .ERR(),.MEM_DOUT1(IR_pre_fetch),.MEM_DOUT2(dout2_memory),.IO_IN(IOBUS_IN),.IO_WR(IOBUS_WR),.MEM_SIZE(mem_size_after_memory),.MEM_SIGN(mem_sign_after_memory));
     // ^ CHANGED aluResult to mem_addr_after FOR PROGRAMMER
     // ^ CHANGED B to mem_data_after FOR PROGRAMMER
@@ -409,46 +414,47 @@
     begin
 
     
-        fetch_to_decode[31:0]       = pc_delayed_fetch;
-        fetch_to_decode[63:32]      = IR_fetch;
+        fetch_to_decode[31:0]       <= pc_delayed_fetch;
+        fetch_to_decode[63:32]      <= IR_fetch;
                 if(pcWrite_fetch)
             begin
-                pc_delayed_fetch = pc_fetch;
+                pc_delayed_fetch <= pc_fetch;
             end
-        decode_to_execute[31:0]     = pc_decode;
-        decode_to_execute[63:32]    = I_immed_decode;  
-        decode_to_execute[95:64]    = A_decode;        
-        decode_to_execute[127:96]   = B_decode;        
-        decode_to_execute[159:128]  = aluBin_decode;   
-        decode_to_execute[191:160]  = aluAin_decode;   
-        decode_to_execute[223:192]  = IR_decode;       
-        decode_to_execute[224:224]  = regWrite_decode; 
-        decode_to_execute[225:225]  = memWrite_decode; 
-        decode_to_execute[226:226]  = memRead2_decode; 
-        decode_to_execute[228:227]  = rf_wr_sel_decode;
-        decode_to_execute[230:229]  = pcSource_decode; 
-        decode_to_execute[232:231]  = alu_fun_decode;   
+        decode_to_execute[31:0]     <= pc_decode;
+        decode_to_execute[63:32]    <= I_immed_decode;  
+        decode_to_execute[95:64]    <= A_decode;        
+        decode_to_execute[127:96]   <= B_decode;        
+        decode_to_execute[159:128]  <= aluBin_decode;   
+        decode_to_execute[191:160]  <= aluAin_decode;   
+        decode_to_execute[223:192]  <= IR_decode;       
+        decode_to_execute[224:224]  <= regWrite_decode; 
+        decode_to_execute[225:225]  <= memWrite_decode; 
+        decode_to_execute[226:226]  <= memRead2_decode; 
+        decode_to_execute[228:227]  <= rf_wr_sel_decode;
+        decode_to_execute[230:229]  <= pcSource_decode; 
+        decode_to_execute[232:231]  <= alu_fun_decode;   
 
-        execute_to_memory[31:0]     = pc_execute;
-        execute_to_memory[63:32]    = branch_pc_execute;
-        execute_to_memory[95:64]    = jump_pc_execute;  
-        execute_to_memory[127:96]   = B_execute;        
-        execute_to_memory[159:128]  = aluResult_execute;
-        execute_to_memory[191:160]  = IR_execute;       
-        execute_to_memory[223:192]  = regWrite_execute; 
-        execute_to_memory[224:224]  = memWrite_execute; 
-        execute_to_memory[225:225]  = memRead2_execute; 
-        execute_to_memory[227:226]  = rf_wr_sel_execute;
-        execute_to_memory[229:228]  = pcSource_execute;
-        execute_to_memory[261:230]  = jalr_pc_execute;
+        execute_to_memory[31:0]     <= pc_execute;
+        execute_to_memory[63:32]    <= branch_pc_execute;
+        execute_to_memory[95:64]    <= jump_pc_execute;  
+        execute_to_memory[127:96]   <= B_execute;        
+        execute_to_memory[159:128]  <= aluResult_execute;
+        execute_to_memory[191:160]  <= IR_execute;       
+        execute_to_memory[223:192]  <= regWrite_execute; 
+        execute_to_memory[224:224]  <= memWrite_execute; 
+        execute_to_memory[225:225]  <= memRead2_execute; 
+        execute_to_memory[227:226]  <= rf_wr_sel_execute;
+        execute_to_memory[229:228]  <= pcSource_execute;
+        execute_to_memory[261:230]  <= jalr_pc_execute;
         
-        memory_to_writeback[31:0]     = pc_memory;
-        memory_to_writeback[63:32]    = aluResult_memory;
-        memory_to_writeback[95:64]    = dout2_memory;
-        memory_to_writeback[127:96]   = IR_memory;
-        memory_to_writeback[128:128]  = regWrite_memory;
-        memory_to_writeback[130:129]  = rf_wr_sel_memory;
-        memory_to_writeback[132:131]  = pcSource_memory;
+        memory_to_writeback[31:0]     <= pc_memory;
+        memory_to_writeback[63:32]    <= aluResult_memory;
+        memory_to_writeback[95:64]    <= dout2_memory;
+        memory_to_writeback[127:96]   <= IR_memory;
+        memory_to_writeback[128:128]  <= regWrite_memory;
+        memory_to_writeback[130:129]  <= rf_wr_sel_memory;
+        memory_to_writeback[132:131]  <= pcSource_memory;
+        memory_to_writeback[164:133]  <= mem_addr_after_memory;
         
     end
 
@@ -491,5 +497,6 @@
         assign regWrite_writeback = memory_to_writeback[128:128];
         assign rf_wr_sel_writeback = memory_to_writeback[130:129];
         assign pcSource_writeback = memory_to_writeback[132:131];
+        assign mem_addr_after_writeback = memory_to_writeback[164:133];
 
 endmodule

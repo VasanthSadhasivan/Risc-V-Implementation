@@ -36,7 +36,10 @@ module OTTER_Wrapper_Programmable(
     output [7:0] CATHODES,
     output [3:0] ANODES
     );
-       
+
+    //DEBUG WIRES
+    wire [31:0] debug ;
+    wire [15:0] SSEG;
     // INPUT PORT IDS ////////////////////////////////////////////////////////////
     localparam SWITCHES_AD = 32'h11000000;
     localparam CLKCNTLO_AD = 32'h11400000;
@@ -49,6 +52,7 @@ module OTTER_Wrapper_Programmable(
     // Signals for connecting OTTER_MCU to OTTER_wrapper /////////////////////////
     logic s_interrupt, s_reset;
     logic sclk = '0;
+    logic [25:0] waitfor = 0;
 
     // Registers for IOBUS ///////////////////////////////////////////////////////   
     logic [15:0] r_SSEG = '0;
@@ -63,14 +67,18 @@ module OTTER_Wrapper_Programmable(
     OTTER_MCU MCU(.EXT_RESET(s_reset), /*.INTR(s_interrupt),*/ .CLK(sclk), 
                   .IOBUS_OUT(IOBUS_out), .IOBUS_IN(IOBUS_in),
                   .IOBUS_ADDR(IOBUS_addr), .IOBUS_WR(IOBUS_wr),
-                  .PROG_RX(RX), .PROG_TX(TX));
+                  .PROG_RX(RX), .PROG_TX(TX), .DEBUG(debug));
 
     // Declare Seven Segment Display /////////////////////////////////////////////
-    SevSegDisp SSG_DISP(.DATA_IN(r_SSEG), .CLK(CLK), .MODE(1'b0),
+    SevSegDisp SSG_DISP(.DATA_IN(SSEG), .CLK(CLK), .MODE(1'b0),
                         .CATHODES(CATHODES), .ANODES(ANODES));
 
     // Connect LEDS register to port /////////////////////////////////////////////
+
     assign LEDS = r_LEDS;
+    assign SSEG = r_SSEG;
+    //assign LEDS = sclk;
+    //assign SSEG = debug[15:0];
    
     // Debounce/one-shot the reset and interrupt buttons /////////////////////////
     debounce_one_shot DB_I(.CLK(sclk), .BTN(BTNL), .DB_BTN(s_interrupt));
@@ -78,8 +86,11 @@ module OTTER_Wrapper_Programmable(
    
     // Clock divider to create 50 MHz clock for MCU //////////////////////////////
     always_ff @(posedge CLK) begin
-        sclk <= ~sclk;
+        sclk <= waitfor[0];
+        waitfor <= waitfor + 1;
     end
+    
+    
    
     // Performance counter (MCU clock cycles) ////////////////////////////////////
     always_ff @(posedge sclk) begin

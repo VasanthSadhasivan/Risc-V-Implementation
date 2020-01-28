@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"SIM_time_impl.v" \
+
+sv xil_defaultlib  \
+"../../../../../otter.srcs/sim_1/new/SIM.sv" \
+
+# Do not sort compile order
+nosort
