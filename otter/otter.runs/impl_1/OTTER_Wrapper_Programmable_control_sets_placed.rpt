@@ -1,0 +1,112 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+| Date         : Tue Jan 28 09:13:42 2020
+| Host         : DESKTOP-8MTJ33M running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file OTTER_Wrapper_Programmable_control_sets_placed.rpt
+| Design       : OTTER_Wrapper_Programmable
+| Device       : xc7a35t
+-------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    34 |
+|    Minimum number of control sets                        |    34 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    75 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    34 |
+| >= 0 to < 4        |     4 |
+| >= 4 to < 6        |     2 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     5 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    23 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             580 |          206 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             150 |           71 |
+| Yes          | No                    | No                     |             197 |           69 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             270 |           87 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------+------------------+----------------+
+|         Clock Signal        |                          Enable Signal                          |                         Set/Reset Signal                        | Slice Load Count | Bel Load Count |
++-----------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------+------------------+----------------+
+|  sclk_BUFG                  | MCU/programmer/uart_tx_word/uart_tx/o_Tx_Serial_i_1_n_0         |                                                                 |                1 |              1 |
+|  SSG_DISP/CathMod/s_clk_500 |                                                                 | SSG_DISP/CathMod/r_disp_digit[0]_i_1_n_0                        |                1 |              2 |
+|  SSG_DISP/CathMod/s_clk_500 |                                                                 | SSG_DISP/CathMod/r_disp_digit[0]                                |                2 |              2 |
+|  CLK_IBUF_BUFG              |                                                                 |                                                                 |                2 |              3 |
+|  sclk_BUFG                  |                                                                 | DB_R/s_reset                                                    |                2 |              4 |
+|  sclk_BUFG                  | MCU/programmer/uart_tx_word/uart_tx/E[0]                        | DB_R/s_reset                                                    |                1 |              4 |
+|  sclk_BUFG                  | DB_R/s_db_count[7]_i_1_n_0                                      |                                                                 |                2 |              8 |
+|  sclk_BUFG                  | MCU/programmer/uart_tx_word/uart_tx/r_Tx_Data_0                 |                                                                 |                3 |              8 |
+|  sclk_BUFG                  | MCU/programmer/uart_tx_word/uart_tx/r_Clock_Count[8]_i_2__0_n_0 | MCU/programmer/uart_tx_word/uart_tx/r_Clock_Count0              |                3 |              9 |
+|  SSG_DISP/CathMod/s_clk_500 |                                                                 |                                                                 |                5 |              9 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/uart_rx/r_Clock_Count[8]_i_2_n_0    | MCU/programmer/uart_rx_word/uart_rx/r_Clock_Count[8]_i_1__0_n_0 |                4 |              9 |
+|  sclk_BUFG                  | MCU/Q[0]                                                        |                                                                 |                7 |             16 |
+|  sclk_BUFG                  | MCU/Q[0]                                                        | MCU/programmer/uart_rx_word/execute_to_memory_reg[225]          |                7 |             16 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/E[0]                                |                                                                 |                5 |             16 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/r_ram_addr_reg[18][0]               |                                                                 |                9 |             16 |
+|  CLK_IBUF_BUFG              |                                                                 | SSG_DISP/CathMod/clear                                          |                5 |             20 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/uart_rx/FSM_sequential_state_reg    | DB_R/s_reset                                                    |                6 |             24 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/uart_rx/r_Rx_DV_reg_0[0]            | DB_R/s_reset                                                    |                6 |             24 |
+|  sclk_BUFG                  | MCU/programmer/r_timeout_counter[24]_i_2_n_0                    | MCU/programmer/uart_rx_word/FSM_sequential_state_reg_0          |                7 |             25 |
+|  sclk_BUFG                  |                                                                 | MCU/memory/decode_to_execute_reg[194]                           |               21 |             27 |
+|  sclk_BUFG                  |                                                                 | MCU/alu_fun_execute[1]                                          |               12 |             31 |
+|  sclk_BUFG                  | MCU/stall[32]_i_2_n_0                                           | MCU/memory/pc_write_cont_reg_0                                  |                8 |             31 |
+|  sclk_BUFG                  |                                                                 | MCU/RF/fetch_to_decode_reg[50]                                  |               13 |             32 |
+|  sclk_BUFG                  |                                                                 | MCU/RF/fetch_to_decode_reg[55]                                  |               15 |             32 |
+|  sclk_BUFG                  | memory_to_writeback_reg[95]_i_14_n_0                            |                                                                 |                9 |             32 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/FSM_sequential_r_state_reg[1]_5[0]  | MCU/programmer/uart_rx_word/SR[0]                               |               14 |             32 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/FSM_sequential_r_state_reg[0]       |                                                                 |                9 |             32 |
+|  sclk_BUFG                  | MCU/programmer/uart_tx_word/uart_tx/sending_byte_num_reg[0][0]  | DB_R/s_reset                                                    |               13 |             32 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/uart_rx/E[0]                        | DB_R/s_reset                                                    |                7 |             32 |
+|  sclk_BUFG                  | MCU/memory/MEM_READ10                                           | DB_R/SR[0]                                                      |               11 |             32 |
+|  sclk_BUFG                  | MCU/programmer/uart_rx_word/FSM_sequential_r_state_reg[1]_4     |                                                                 |                8 |             32 |
+|  sclk_BUFG                  | MCU/memory/MEM_READ10                                           |                                                                 |               16 |             36 |
+|  sclk_BUFG                  | MCU/RF/p_0_in                                                   |                                                                 |               12 |             96 |
+|  sclk_BUFG                  |                                                                 |                                                                 |              199 |            571 |
++-----------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------+------------------+----------------+
+
+

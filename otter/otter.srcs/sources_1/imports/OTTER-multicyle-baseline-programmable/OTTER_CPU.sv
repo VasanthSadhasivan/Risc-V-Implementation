@@ -205,9 +205,9 @@
             begin
                 pc_write_cont <= 1;
                 memRead1_fetch <= 1;
-                if(dependency_reason)
+                if(dependency_reason || pcSource_execute == 0)
                     begin
-                        dependency_reason = 0;
+                        dependency_reason <= 0;
                         stall <= 0;
                     end
             end
