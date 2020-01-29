@@ -70,7 +70,7 @@
 
     // PIPELINE REGISTERS //
     logic [63:0] fetch_to_decode = 0;
-    logic [266:0] decode_to_execute = 0;
+    logic [235:0] decode_to_execute = 0;
     logic [262:0] execute_to_memory = 0;
     logic [165:0] memory_to_writeback = 0;
     //********************//
@@ -338,7 +338,7 @@
   
     //pc target calculations 
     assign next_pc_fetch = pc_fetch + 4;    //PC is byte aligned, memory is word aligned
-    assign jalr_pc_execute = I_immed_execute + A_execute;
+    assign jalr_pc_execute = (IR_execute[19:5] == IR_execute[11:7])?pc_execute +4:I_immed_execute + A_execute;
     //assign branch_pc = pc + {{21{IR[31]}},IR[7],IR[30:25],IR[11:8] ,1'b0};   //word aligned addresses
     assign branch_pc_execute = pc_execute + {{20{IR_execute[31]}},IR_execute[7],IR_execute[30:25],IR_execute[11:8],1'b0};   //byte aligned addresses
     assign jump_pc_execute = pc_execute + {{12{IR_execute[31]}}, IR_execute[19:12], IR_execute[20],IR_execute[30:21],1'b0};
@@ -432,7 +432,7 @@
         decode_to_execute[226:226]  <= memRead2_decode; 
         decode_to_execute[228:227]  <= rf_wr_sel_decode;
         decode_to_execute[230:229]  <= pcSource_decode; 
-        decode_to_execute[232:231]  <= alu_fun_decode;   
+        decode_to_execute[234:231]  <= alu_fun_decode;   
 
         execute_to_memory[31:0]     <= pc_execute;
         execute_to_memory[63:32]    <= branch_pc_execute;
@@ -475,7 +475,7 @@
         assign memRead2_execute     = decode_to_execute[226:226];
         assign rf_wr_sel_execute    = decode_to_execute[228:227];
         assign pcSource_execute     = decode_to_execute[230:229];
-        assign alu_fun_execute      = decode_to_execute[232:231];
+        assign alu_fun_execute      = decode_to_execute[234:231];
                 
         assign jump_pc_memory = execute_to_memory[95:64];
         assign branch_pc_memory = execute_to_memory[63:32];
