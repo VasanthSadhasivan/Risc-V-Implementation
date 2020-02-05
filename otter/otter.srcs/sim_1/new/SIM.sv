@@ -46,7 +46,7 @@ module SIM(
       BTNL = 0;
       BTNC = 0;
       RX = 0;
-      SWITCHES = 1;
+      SWITCHES = 2;
     end
     
    always  

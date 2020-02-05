@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-/*
+
 module Mult5to1(In1, In2, In3, In4, In5, Sel, Out);
     input [31:0] In1, In2, In3, In4, In5; //four 64-bit inputs 
     input [2:0] Sel; //selector signal
@@ -36,7 +36,7 @@ module Mult5to1(In1, In2, In3, In4, In5, Sel, Out);
             default: Out <= In1; 
         endcase
 endmodule
-*/
+
 
 module Mult4to1(In1, In2, In3, In4, Sel, Out);
     input [31:0] In1, In2, In3, In4; //four 64-bit inputs 
