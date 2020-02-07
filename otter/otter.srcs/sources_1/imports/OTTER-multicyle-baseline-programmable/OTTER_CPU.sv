@@ -36,6 +36,8 @@
 
     // ************************ BEGIN PROGRAMMER ************************ 
     
+    logic [31:0] counter = 0;
+    
     wire RESET;
     wire [31:0] s_prog_ram_addr;
     wire [31:0] s_prog_ram_data;
@@ -129,7 +131,7 @@
     wire [31:0] wd_writeback;
     
     wire [31:0] dout2_memory;
-    logic [31:0] dout2_memory_delayed;    
+    logic [31:0] dout2_memory_delayed = 0;    
     wire [31:0] dout2_writeback;
     
     wire [31:0] IR_pre_decode;
@@ -153,7 +155,7 @@
     
     wire memRead1_fetch;
     wire memRead1_fetch_data;
-    logic memRead1_fetch_dep;
+    logic memRead1_fetch_dep = 1;
     logic memRead1_fetch_cont=1;
     
     
@@ -430,6 +432,7 @@
     // tying left hand side of wires to left side of register
     always @(posedge CLK)
     begin
+        counter <= counter + 1;
         dout2_memory_delayed <= dout2_memory;
         if(memRead1_fetch)
             delayed_pc_fetch <= pc_fetch;

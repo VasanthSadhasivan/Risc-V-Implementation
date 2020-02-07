@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Tue Feb  4 16:59:44 2020
+| Date         : Wed Feb  5 22:31:00 2020
 | Host         : DESKTOP-8MTJ33M running 64-bit major release  (build 9200)
 | Command      : report_utilization -file OTTER_Wrapper_Programmable_utilization_synth.rpt -pb OTTER_Wrapper_Programmable_utilization_synth.pb
 | Design       : OTTER_Wrapper_Programmable
@@ -30,13 +30,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                | 2029 |     0 |     20800 |  9.75 |
-|   LUT as Logic             | 1978 |     0 |     20800 |  9.51 |
+| Slice LUTs*                | 2042 |     0 |     20800 |  9.82 |
+|   LUT as Logic             | 1991 |     0 |     20800 |  9.57 |
 |   LUT as Memory            |   51 |     0 |      9600 |  0.53 |
 |     LUT as Distributed RAM |   48 |     0 |           |       |
 |     LUT as Shift Register  |    3 |     0 |           |       |
-| Slice Registers            | 1122 |     0 |     41600 |  2.70 |
-|   Register as Flip Flop    | 1122 |     0 |     41600 |  2.70 |
+| Slice Registers            | 1121 |     0 |     41600 |  2.69 |
+|   Register as Flip Flop    | 1121 |     0 |     41600 |  2.69 |
 |   Register as Latch        |    0 |     0 |     41600 |  0.00 |
 | F7 Muxes                   |  137 |     0 |     16300 |  0.84 |
 | F8 Muxes                   |   64 |     0 |      8150 |  0.79 |
@@ -59,7 +59,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 5     |          Yes |         Set |            - |
-| 1117  |          Yes |       Reset |            - |
+| 1116  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -153,12 +153,12 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     | 1134 |                 LUT |
-| FDRE     | 1117 |        Flop & Latch |
-| LUT2     |  379 |                 LUT |
-| LUT5     |  249 |                 LUT |
-| LUT4     |  199 |                 LUT |
-| LUT3     |  195 |                 LUT |
+| LUT6     | 1142 |                 LUT |
+| FDRE     | 1116 |        Flop & Latch |
+| LUT2     |  377 |                 LUT |
+| LUT5     |  256 |                 LUT |
+| LUT4     |  212 |                 LUT |
+| LUT3     |  193 |                 LUT |
 | CARRY4   |  149 |          CarryLogic |
 | MUXF7    |  137 |               MuxFx |
 | RAMD32   |   72 |  Distributed Memory |

@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date             : Tue Feb  4 17:01:31 2020
+| Date             : Wed Feb  5 22:33:08 2020
 | Host             : DESKTOP-8MTJ33M running 64-bit major release  (build 9200)
 | Command          : report_power -file OTTER_Wrapper_Programmable_power_routed.rpt -pb OTTER_Wrapper_Programmable_power_summary_routed.pb -rpx OTTER_Wrapper_Programmable_power_routed.rpx
 | Design           : OTTER_Wrapper_Programmable
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.080        |
+| Total On-Chip Power (W)  | 0.085        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.008        |
+| Dynamic (W)              | 0.013        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,21 +53,21 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.003 |     3797 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     1921 |     20800 |            9.24 |
+| Slice Logic              |     0.004 |     3820 |       --- |             --- |
+|   LUT as Logic           |     0.003 |     1934 |     20800 |            9.30 |
 |   CARRY4                 |    <0.001 |      149 |      8150 |            1.83 |
-|   Register               |    <0.001 |     1122 |     41600 |            2.70 |
-|   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
+|   Register               |    <0.001 |     1121 |     41600 |            2.69 |
 |   F7/F8 Muxes            |    <0.001 |      201 |     32600 |            0.62 |
 |   LUT as Distributed RAM |    <0.001 |       48 |      9600 |            0.50 |
+|   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
+|   LUT as Shift Register  |    <0.001 |        2 |      9600 |            0.02 |
 |   Others                 |     0.000 |       24 |       --- |             --- |
-|   LUT as Shift Register  |     0.000 |        2 |      9600 |            0.02 |
-| Signals                  |     0.003 |     4027 |       --- |             --- |
-| Block RAM                |     0.001 |       16 |        50 |           32.00 |
+| Signals                  |     0.006 |     4057 |       --- |             --- |
+| Block RAM                |     0.002 |       16 |        50 |           32.00 |
 | DSPs                     |    <0.001 |        3 |        90 |            3.33 |
 | I/O                      |    <0.001 |       48 |       106 |           45.28 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.080 |          |           |                 |
+| Total                    |     0.085 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -77,7 +77,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.018 |       0.008 |      0.010 |
+| Vccint    |       1.000 |     0.022 |       0.012 |      0.010 |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -146,10 +146,11 @@ Table of Contents
 +----------------------------+-----------+
 | Name                       | Power (W) |
 +----------------------------+-----------+
-| OTTER_Wrapper_Programmable |     0.008 |
-|   MCU                      |     0.005 |
-|     memory                 |     0.002 |
+| OTTER_Wrapper_Programmable |     0.013 |
+|   MCU                      |     0.010 |
+|     memory                 |     0.004 |
 |     programmer             |     0.002 |
+|       uart_rx_word         |     0.001 |
 +----------------------------+-----------+
 
 
