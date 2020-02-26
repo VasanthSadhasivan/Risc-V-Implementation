@@ -4,6 +4,7 @@
 // Engineer: Keefe Johnson
 // 
 // Create Date: 05/09/2019 05:27:29 PM
+// Updated Date: 02/13/2020 11:00:00 AM
 // Design Name: 
 // Module Name: programmer
 // Project Name: 
@@ -20,6 +21,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+import memory_bus_sizes::*;
+
+// WARNING: this programmer assumes WORD_SIZE = 4 and ADDR_WIDTH = 32!
+
 module programmer #(
     parameter CLK_RATE = -1,      // rate of clk in MHz (must override)
     parameter BAUD = 115200,      // raw serial rate in bits/s
@@ -31,9 +36,7 @@ module programmer #(
     input srx,
     output stx,
     output mcu_reset,
-    output [31:0] ram_addr,
-    output [31:0] ram_data,
-    output logic ram_we    
+    i_prog_to_mhub.controller mhub
     );
 
     // timeout if waiting for a serial word for too long
@@ -52,10 +55,10 @@ module programmer #(
     
     // state
     typedef enum {IDLE, FAILED, WM_WAIT_ADDR, WM_WAIT_LEN, WM_WAIT_DATA,
-                  WM_DONE} e_state;
+                  WM_DONE, DISABLED} e_state;
 
     // tx_word mux select
-    enum {ECHO, CKSUM, FAIL} sel_tx_word;
+    enum {ECHO, CKSUM, INV_CKSUM, FAIL} sel_tx_word;
 
     // wires to/from modules
     wire rx_ready;
@@ -75,13 +78,16 @@ module programmer #(
     logic dec_words_remain;
     logic clr_cksum;
     logic acc_cksum;
+    logic set_error;
+    logic clr_error;
 
     // registers
-    e_state r_state = IDLE;
+    e_state r_state = DISABLED;//IDLE;
     logic [31:0] r_words_remain = 0;
     logic [31:0] r_ram_addr = 0;
     logic r_mcu_reset = 0;
     logic [31:0] r_cksum = 0;
+    logic r_error = 0;
 
     // serial IO modules
     uart_rx_word #(.CLK_RATE(CLK_RATE), .BAUD(BAUD), .IB_TIMEOUT(IB_TIMEOUT))
@@ -96,14 +102,17 @@ module programmer #(
     assign rx_valid = (rx_word[7:0] ^ rx_word[15:8] ^ rx_word[23:16]
                        ^ rx_word[31:24]) == 0;
     assign mcu_reset = r_mcu_reset;
-    assign ram_addr = r_ram_addr;
-    assign ram_data = rx_word;
+    assign mhub.waddr = r_ram_addr[31:2];
+    assign mhub.din = rx_word;
+    assign mhub.flush = 0;
+    assign mhub.we = 1;  // always write when mhub.en=1
 
     // tx_word mux
     always_comb begin
         case (sel_tx_word)
             ECHO: tx_word = rx_word;
             CKSUM: tx_word = r_cksum;
+            INV_CKSUM: tx_word = ~r_cksum;  // used to indicate data flow error
             FAIL: tx_word = FAIL_RESPONSE;
             default: tx_word = FAIL_RESPONSE;
         endcase
@@ -114,7 +123,7 @@ module programmer #(
 
         next_state = r_state;
         waiting = 0;
-        ram_we = 0;
+        mhub.en = 0;
         set_mcu_reset = 0;
         clr_mcu_reset = 0;
         ld_ram_addr = 0;
@@ -123,6 +132,8 @@ module programmer #(
         dec_words_remain = 0;
         clr_cksum = 0;
         acc_cksum = 0;
+        set_error = 0;
+        clr_error = 0;
         tx_send = 0;
         sel_tx_word = ECHO;
 
@@ -148,6 +159,7 @@ module programmer #(
                             sel_tx_word = ECHO;
                             tx_send = 1;
                             clr_cksum = 1;
+                            clr_error = 1;
                             next_state = WM_WAIT_ADDR;
                         end
 
@@ -193,10 +205,25 @@ module programmer #(
                     next_state = FAILED;
                 end else if (rx_ready) begin
                     waiting = 0;
-                    ram_we = 1;
                     acc_cksum = 1;
                     inc_ram_addr = 1;
                     dec_words_remain = 1;
+                    if (!r_error) begin
+                        // if a previous word failed to be accepted by mhub,
+                        //   silently discard remaining words  
+                        mhub.en = 1;
+                    end 
+                    if (mhub.hold) begin
+                        // if mhub isn't ready to accept the write immediately,
+                        //   the transfer has failed, because we can't wait or
+                        //   we'll lose serial data! but we must still read
+                        //   the rest of the serial data as there's currently
+                        //   no protocol to tell the pc-side to pause or cancel
+                        
+                        //actually, don't worry about it for now
+                        //TODO: make it more robust
+                        //set_error = 1;
+                    end
                     if (r_words_remain == 1) begin
                         next_state = WM_DONE;
                     end 
@@ -205,11 +232,23 @@ module programmer #(
 
             WM_DONE: begin
                 if (tx_idle) begin
-                    sel_tx_word = CKSUM;
+                    if (r_error) begin
+                        // if a data flow error occurred, we need to return a
+                        //   known-incorrect checksum rather than a fixed error
+                        //   code (which might by chance match the correct
+                        //   checksum), until the protocol is revised to handle an
+                        //   explicit error code here
+                        sel_tx_word = INV_CKSUM;
+                    end else begin
+                        sel_tx_word = CKSUM;
+                    end
                     tx_send = 1;
+                    clr_error = 1;
                     next_state = IDLE;
                 end
             end
+    
+            DISABLED: next_state = DISABLED;
 
             default: next_state = IDLE;
         endcase
@@ -256,6 +295,13 @@ module programmer #(
             end
         end else begin
             r_timeout_counter = 0;
+        end
+
+        // error flag
+        if (set_error) begin
+            r_error <= 1;
+        end else if (clr_error) begin
+            r_error <= 0;
         end
 
     end    

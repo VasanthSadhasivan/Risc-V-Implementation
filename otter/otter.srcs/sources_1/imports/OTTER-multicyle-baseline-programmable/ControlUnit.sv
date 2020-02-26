@@ -21,7 +21,6 @@
 //`include "opcodes.svh"
 
 module OTTER_CU_FSM(
-    input CU_CLK,
     //input CU_INT,
     //input CU_prevINT,
     input CU_RESET,

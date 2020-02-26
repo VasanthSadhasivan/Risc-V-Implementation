@@ -25,16 +25,20 @@ module ProgCount(
     input PC_RST,
     input PC_LD,
     input logic [31:0] PC_DIN,
-    output logic [31:0] PC_COUNT=0
+    output logic [31:0] PC_COUNT=0,
+    input s_stall
     );
     
     
     always_ff @(posedge PC_CLK)
     begin
+        if(!s_stall)
+        begin
         if (PC_RST == 1'b1)
             PC_COUNT <= '0;
         else if (PC_LD == 1'b1)
             PC_COUNT <= PC_DIN;
+        end
     end
     
 endmodule

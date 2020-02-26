@@ -24,10 +24,7 @@
  module OTTER_MCU(input CLK,
                 //input INTR,
                 input EXT_RESET,  // CHANGED RESET TO EXT_RESET FOR PROGRAMMER
-                input [31:0] IOBUS_IN,
-                output [31:0] IOBUS_OUT,
-                output [31:0] IOBUS_ADDR,
-                output logic IOBUS_WR,
+                i_mhub_to_mmio.controller MMIO,
                 input PROG_RX,  // ADDED PROG_RX FOR PROGRAMMER
                 output PROG_TX,  // ADDED PROG_TX FOR PROGRAMMER
                 //DEBUG OUTPUTS
@@ -54,14 +51,6 @@
     wire mem_sign_after_memory;
     
     wire mem_we_after_memory;
-
-    programmer #(.CLK_RATE(50), .BAUD(115200), .IB_TIMEOUT(200),
-                 .WAIT_TIMEOUT(500))
-        programmer(.clk(CLK), .rst(EXT_RESET), .srx(PROG_RX), .stx(PROG_TX),
-                   .mcu_reset(s_prog_mcu_reset), .ram_addr(s_prog_ram_addr),
-                   .ram_data(s_prog_ram_data), .ram_we(s_prog_ram_we));
-
-    // ************************ END PROGRAMMER ************************ 
 
     // HAZARD PREVENTION //
     logic [32:0] stall = 0;
@@ -186,6 +175,9 @@
     // CONTROL HAZARD PREVENTION //
     always @(posedge CLK)
     begin
+        if(!s_stall)
+        begin
+        
         if( IR_decode[6:0] == 7'b1101111 || 
             IR_decode[6:0] == 7'b1100111 ||
             IR_decode[6:0] == 7'b1100011 ||
@@ -239,6 +231,7 @@
                 pc_write_dep = 0;            
                 stall <= 0;
             end
+        end
     end
     
     //GENERAL HAZARD PREVENTION
@@ -337,7 +330,7 @@
     assign opcode_writeback  = IR_writeback[6:0];
     //PC is byte-addressed but our memory is word addressed 
     ProgCount PC (.PC_CLK(CLK), .PC_RST(RESET), .PC_LD(pcWrite_fetch),
-                 .PC_DIN(pc_value_fetch), .PC_COUNT(pc_fetch));   
+                 .PC_DIN(pc_value_fetch), .PC_COUNT(pc_fetch), .s_stall(s_stall));   
     
     // Creates a 5-to-1 multiplexor used to select the source of the next PC
     Mult5to1 PCdatasrc (next_pc_fetch, jalr_pc_memory, branch_pc_memory, jump_pc_memory, pc_memory+4, pcSource_memory, pc_value_fetch);
@@ -351,7 +344,7 @@
     OTTER_ALU ALU (alu_fun_execute, aluAin_execute, aluBin_execute, aluResult_execute); // the ALU
     
     // Creates a RISC-V register file
-    OTTER_registerFile RF (IR_decode[19:15], IR_decode[24:20], IR_writeback[11:7], wd_writeback, regWrite_writeback, A_decode, B_decode, CLK); // Register file
+    OTTER_registerFile RF (IR_decode[19:15], IR_decode[24:20], IR_writeback[11:7], wd_writeback, regWrite_writeback, A_decode, B_decode, CLK, s_stall); // Register file
  
     //Creates 4-to-1 multiplexor used to select reg write back data
     Mult4to1 regWriteback (pc_writeback + 4,csr_reg,dout2_writeback,aluResult_writeback,rf_wr_sel_writeback,wd_writeback);
@@ -381,23 +374,14 @@
 
     // ************************ BEGIN PROGRAMMER ************************ 
 
-    assign mem_addr_after_memory = s_prog_ram_we ? s_prog_ram_addr : aluResult_memory;  // 2:1 mux
-    assign mem_data_after_memory = s_prog_ram_we ? s_prog_ram_data : B_memory;  // 2:1 mux
-    assign mem_size_after_memory = s_prog_ram_we ? 2'b10 : IR_memory[13:12];  // 2:1 mux
-    assign mem_sign_after_memory = s_prog_ram_we ? 1'b0 : IR_memory[14];  // 2:1 mux
-    assign mem_we_after_memory = s_prog_ram_we | memWrite_memory;  // or gate
+    assign mem_addr_after_memory = /*s_prog_ram_we ? s_prog_ram_addr : */aluResult_memory;  // 2:1 mux
+    assign mem_data_after_memory = /*s_prog_ram_we ? s_prog_ram_data : */B_memory;  // 2:1 mux
+    assign mem_size_after_memory =/* s_prog_ram_we ? 2'b10 : */IR_memory[13:12];  // 2:1 mux
+    assign mem_sign_after_memory =/* s_prog_ram_we ? 1'b0 : */IR_memory[14];  // 2:1 mux
+    assign mem_we_after_memory =/* s_prog_ram_we | */memWrite_memory;  // or gate
     assign RESET = s_prog_mcu_reset | EXT_RESET;  // or gate
 
     // ************************ END PROGRAMMER ************************               
-                           
-     OTTER_mem_byte #(14) memory  (.MEM_CLK(CLK),.MEM_ADDR1(pc_fetch),.MEM_ADDR2(mem_addr_after_memory),.MEM_DIN2(mem_data_after_memory),
-                               .MEM_WRITE2(mem_we_after_memory),.MEM_READ1(memRead1_fetch),.MEM_READ2(memRead2_memory),
-                               .ERR(),.MEM_DOUT1(IR_pre_decode),.MEM_DOUT2(dout2_memory),.IO_IN(IOBUS_IN),.IO_WR(IOBUS_WR),.MEM_SIZE(mem_size_after_memory),.MEM_SIGN(mem_sign_after_memory));
-    // ^ CHANGED aluResult to mem_addr_after FOR PROGRAMMER
-    // ^ CHANGED B to mem_data_after FOR PROGRAMMER
-    // ^ CHANGED memWrite to mem_we_after FOR PROGRAMMER
-    // ^ CHANGED IR[13:12] to mem_size_after FOR PROGRAMMER
-    // ^ CHANGED IR[14] to mem_sign_after FOR PROGRAMMER
      
      OTTER_CU_Decoder CU_DECODER(.CU_OPCODE(opcode_decode), .CU_FUNC3(IR_decode[14:12]),.CU_FUNC7(IR_decode[31:25]), 
              .CU_BR_EQ(br_eq),.CU_BR_LT(br_lt),.CU_BR_LTU(br_ltu),.CU_PCSOURCE(pcSource_decode),
@@ -405,7 +389,7 @@
             
      //logic prev_INT=0;
      
-     OTTER_CU_FSM CU_FSM (.CU_CLK(CLK), /*.CU_INT(INTR),*/ .CU_RESET(RESET), .CU_OPCODE(opcode_decode), //.CU_OPCODE(opcode),
+     OTTER_CU_FSM CU_FSM (/*.CU_CLK(CLK),.CU_INT(INTR),*/ .CU_RESET(RESET), .CU_OPCODE(opcode_decode), //.CU_OPCODE(opcode),
                      .CU_FUNC3(IR_decode[14:12]),.CU_FUNC12(IR_decode[31:20]),
                      .CU_REGWRITE(regWrite_decode), .CU_MEMWRITE(memWrite_decode), 
                      .CU_MEMREAD2(memRead2_decode));//.CU_intTaken(intTaken),.CU_intCLR(intCLR),.CU_csrWrite(csrWrite),.CU_prevINT(prev_INT));
@@ -432,6 +416,9 @@
     // tying left hand side of wires to left side of register
     always @(posedge CLK)
     begin
+        if(!s_stall)
+        begin
+        
         counter <= counter + 1;
         dout2_memory_delayed <= dout2_memory;
         if(memRead1_fetch)
@@ -472,7 +459,7 @@
         memory_to_writeback[101:99]  <= pcSource_memory;
         memory_to_writeback[133:102]  <= mem_addr_after_memory;
                 //memory_to_writeback[165:134]<= dout2_memory;
-
+        end
     end
     
     always_comb
@@ -517,5 +504,72 @@
         assign pcSource_writeback = memory_to_writeback[101:99];
         assign mem_addr_after_writeback = memory_to_writeback[133:102];
         assign dout2_writeback = dout2_memory;
+        
+        
+        
+        // ADDED NEW VLM SYSTEM BELOW         
+                           
+        /*OTTER_mem_byte #(14) memory  (.MEM_CLK(CLK),.MEM_ADDR1(pc_fetch),.MEM_ADDR2(mem_addr_after_memory),.MEM_DIN2(mem_data_after_memory),
+                                   .MEM_WRITE2(mem_we_after_memory),.MEM_READ1(memRead1_fetch),.MEM_READ2(memRead2_memory),
+                                   .ERR(),.MEM_DOUT1(IR_pre_decode),.MEM_DOUT2(dout2_memory),.IO_IN(IOBUS_IN),.IO_WR(IOBUS_WR),.MEM_SIZE(mem_size_after_memory),.MEM_SIGN(mem_sign_after_memory));*/
+        // ^ CHANGED aluResult to mem_addr_after FOR PROGRAMMER
+        // ^ CHANGED B to mem_data_after FOR PROGRAMMER
+        // ^ CHANGED memWrite to mem_we_after FOR PROGRAMMER
+        // ^ CHANGED IR[13:12] to mem_size_after FOR PROGRAMMER
+        // ^ CHANGED IR[14] to mem_sign_after FOR PROGRAMMER
+        
+        /*programmer #(.CLK_RATE(50), .BAUD(115200), .IB_TIMEOUT(200),
+                 .WAIT_TIMEOUT(500))
+        programmer(.clk(CLK), .rst(EXT_RESET), .srx(PROG_RX), .stx(PROG_TX),
+                   .mcu_reset(s_prog_mcu_reset), .ram_addr(s_prog_ram_addr),
+                   .ram_data(s_prog_ram_data), .ram_we(s_prog_ram_we));*/
 
+        // ************************ END PROGRAMMER ************************ 
+
+        i_cpui_to_mhub s_cpui();
+        i_cpud_to_mhub s_cpud();
+        i_prog_to_mhub s_prog();
+        i_mhub_to_mmio s_mmio();
+        i_mhub_to_icache s_mhub_to_icache();
+        i_mhub_to_dcache s_mhub_to_dcache();
+        i_icache_to_ram s_icache_to_ram();
+        i_dcache_to_ram s_dcache_to_ram();
+        
+        programmer #(
+            .CLK_RATE(50), .BAUD(115200), .IB_TIMEOUT(200), .WAIT_TIMEOUT(500)
+        ) programmer (
+            .clk(CLK), .rst(EXT_RESET), .srx(PROG_RX), .stx(PROG_TX),
+            .mcu_reset(s_prog_mcu_reset), .mhub(s_prog)
+        );
+        memory_hub mhub(
+            .clk(CLK), .err(), .cpui(s_cpui), .cpud(s_cpud), .prog(s_prog),
+            .mmio(MMIO), .icache(s_mhub_to_icache), .dcache(s_mhub_to_dcache)
+        );
+        icache icache(
+            .clk(CLK), .mhub(s_mhub_to_icache), .ram(s_icache_to_ram)
+        );
+        dcache dcache(
+            .clk(CLK), .mhub(s_mhub_to_dcache), .ram(s_dcache_to_ram)
+        );
+        slow_ram #(
+            .RAM_DEPTH(2**12),  // 4096 blocks * 16 bytes/block = 64KiB 
+            .INIT_FILENAME("otter_memory_blocks.mem")  // load 16-byte blocks
+        ) ram (
+            .clk(CLK), .icache(s_icache_to_ram), .dcache(s_dcache_to_ram)
+        );
+        
+        assign s_cpui.addr = pc_fetch;
+        assign s_cpui.en = memRead1_fetch;
+        assign IR_pre_decode = s_cpui.dout;
+        
+        assign s_cpud.addr = mem_addr_after_memory;
+        assign s_cpud.size = mem_size_after_memory;
+        assign s_cpud.lu = mem_sign_after_memory;
+        assign s_cpud.en = memRead2_memory || mem_we_after_memory;
+        assign s_cpud.we = mem_we_after_memory;
+        assign s_cpud.din = mem_data_after_memory;
+        assign dout2_writeback = s_cpud.dout;
+        
+        assign s_stall = s_cpui.hold || s_cpud.hold;
+        
 endmodule

@@ -60,13 +60,12 @@ module OTTER_Wrapper_Programmable(
     logic [63:0] r_CLKCNT = '0;
 
     // Signals for IOBUS /////////////////////////////////////////////////////////
-    logic [31:0] IOBUS_out, IOBUS_in, IOBUS_addr;
-    logic IOBUS_wr;
+    i_mhub_to_mmio mmio();
+    logic [31:0] r_mmio_dout;
    
     // Declare OTTER_CPU /////////////////////////////////////////////////////////
     OTTER_MCU MCU(.EXT_RESET(s_reset), /*.INTR(s_interrupt),*/ .CLK(sclk), 
-                  .IOBUS_OUT(IOBUS_out), .IOBUS_IN(IOBUS_in),
-                  .IOBUS_ADDR(IOBUS_addr), .IOBUS_WR(IOBUS_wr),
+                  .MMIO(mmio),
                   .PROG_RX(RX), .PROG_TX(TX), .DEBUG(debug));
 
     // Declare Seven Segment Display /////////////////////////////////////////////
@@ -98,23 +97,35 @@ module OTTER_Wrapper_Programmable(
     end
    
     // Connect board peripherals (Memory Mapped IO devices) to IOBUS /////////////
-    // Inputs
-    always_comb begin
-        IOBUS_in = 32'b0;
-        case (IOBUS_addr)
-            SWITCHES_AD: IOBUS_in[15:0] = SWITCHES;
-            CLKCNTLO_AD: IOBUS_in = r_CLKCNT[31:0];
-            CLKCNTHI_AD: IOBUS_in = r_CLKCNT[63:32];
-        endcase
-    end
-    // Outputs
+    assign mmio.dout = r_mmio_dout;
+    assign mmio.hold = 0;  // currently no need to delay mmio reads/writes
+    // NOTE: in/out are flipped now, as this mmio module is like a memory, where
+    //   din is data going from the cpu *into* the mmio (though out to the
+    //   external world), and dout is data going from the mmio to the cpu (though
+    //   in from the external world)
     always_ff @(posedge sclk) begin
-        if (IOBUS_wr) begin
-            case (IOBUS_addr)
-                LEDS_AD: r_LEDS <= IOBUS_out[15:0];
-                SSEG_AD: r_SSEG <= IOBUS_out[15:0];
-            endcase
+        if (mmio.en) begin
+            if (mmio.we) begin
+                // Outputs
+                case ({mmio.waddr, 2'b00})
+                    LEDS_AD: begin
+                        if (mmio.be[0]) r_LEDS[7:0] <= mmio.din[7:0];
+                        if (mmio.be[1]) r_LEDS[15:8] <= mmio.din[15:8];
+                    end
+                    SSEG_AD: begin
+                        if (mmio.be[0]) r_SSEG[7:0] <= mmio.din[7:0];
+                        if (mmio.be[1]) r_SSEG[15:8] <= mmio.din[15:8];
+                    end
+                endcase
+            end else begin
+                // Inputs
+                case ({mmio.waddr, 2'b00})
+                    SWITCHES_AD: r_mmio_dout <= {16'h0000, SWITCHES};
+                    CLKCNTLO_AD: r_mmio_dout <= r_CLKCNT[31:0];
+                    CLKCNTHI_AD: r_mmio_dout <= r_CLKCNT[63:32];
+                endcase
+            end
         end
     end
- 
+
 endmodule

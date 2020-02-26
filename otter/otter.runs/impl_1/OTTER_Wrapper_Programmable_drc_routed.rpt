@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
-| Date         : Wed Feb  5 22:33:03 2020
+| Date         : Tue Feb 25 17:40:46 2020
 | Host         : DESKTOP-8MTJ33M running 64-bit major release  (build 9200)
 | Command      : report_drc -file OTTER_Wrapper_Programmable_drc_routed.rpt -pb OTTER_Wrapper_Programmable_drc_routed.pb -rpx OTTER_Wrapper_Programmable_drc_routed.rpx
 | Design       : OTTER_Wrapper_Programmable
@@ -24,13 +24,14 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 6
-+--------+----------+------------------------+------------+
-| Rule   | Severity | Description            | Violations |
-+--------+----------+------------------------+------------+
-| DPOP-1 | Warning  | PREG Output pipelining | 3          |
-| DPOP-2 | Warning  | MREG Output pipelining | 3          |
-+--------+----------+------------------------+------------+
+             Violations found: 12
++----------+----------+------------------------+------------+
+| Rule     | Severity | Description            | Violations |
++----------+----------+------------------------+------------+
+| DPOP-1   | Warning  | PREG Output pipelining | 3          |
+| DPOP-2   | Warning  | MREG Output pipelining | 3          |
+| PDRC-153 | Warning  | Gated clock check      | 6          |
++----------+----------+------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -62,6 +63,36 @@ Related violations: <none>
 DPOP-2#3 Warning
 MREG Output pipelining  
 DSP MCU/ALU/ALUOut0__1 multiplier stage MCU/ALU/ALUOut0__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+PDRC-153#1 Warning
+Gated clock check  
+Net MCU/dcache/mhub\\.hold_reg_i_2__0_n_2 is a gated clock net sourced by a combinational pin MCU/dcache/mhub\\.hold_reg_i_2__0/O, cell MCU/dcache/mhub\\.hold_reg_i_2__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net MCU/dcache/mhub\\.hold_reg_i_3_n_2 is a gated clock net sourced by a combinational pin MCU/dcache/mhub\\.hold_reg_i_3/O, cell MCU/dcache/mhub\\.hold_reg_i_3. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#3 Warning
+Gated clock check  
+Net MCU/dcache/ram\\.en_reg/G0 is a gated clock net sourced by a combinational pin MCU/dcache/ram\\.en_reg/L3_2/O, cell MCU/dcache/ram\\.en_reg/L3_2 (in MCU/dcache/ram\\.en_reg macro). This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#4 Warning
+Gated clock check  
+Net MCU/icache/i___255_n_2 is a gated clock net sourced by a combinational pin MCU/icache/i___255/O, cell MCU/icache/i___255. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#5 Warning
+Gated clock check  
+Net MCU/icache/mhub\\.hold_reg_i_2_n_2 is a gated clock net sourced by a combinational pin MCU/icache/mhub\\.hold_reg_i_2/O, cell MCU/icache/mhub\\.hold_reg_i_2. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#6 Warning
+Gated clock check  
+Net MCU/icache/ram\\.en_reg/G0 is a gated clock net sourced by a combinational pin MCU/icache/ram\\.en_reg/L3_2/O, cell MCU/icache/ram\\.en_reg/L3_2 (in MCU/icache/ram\\.en_reg macro). This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
 Related violations: <none>
 
 
